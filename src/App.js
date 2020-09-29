@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import Login from './components/Login'
+import Shops from './components/Shops'
+import { setUser, logoutUser } from './reducers/loginReducer'
+import { getUserShops } from './reducers/shopReducer'
+
+
+const App = () => {
+	const dispatch = useDispatch()
+	const user = useSelector(state => state.user)
+	const shops = useSelector(state => state.shops)
+
+	useEffect(() => {
+		const loggedUser = window.localStorage.getItem('loggedUser')
+		if (loggedUser) {
+			const userToLog = JSON.parse(loggedUser)
+			dispatch(setUser(userToLog))
+		}
+	}, [dispatch])
+
+	useEffect(() => {
+		if (user) {
+			dispatch(getUserShops(user))
+		}
+	}, [dispatch, user])
+	const logout = () => {
+		dispatch(logoutUser())
+	}
+	if (!user) {
+		return (
+			<div>
+				<Login/>
+			</div>
+		)
+	}
+	return (
+		<div>
+			<h1>{user.username}</h1>
+			<Shops
+				shops={shops}
+			/>
+			<div>
+				<button onClick={logout}>logout</button>
+			</div> 		
+		</div>
+	);
 }
 
 export default App;

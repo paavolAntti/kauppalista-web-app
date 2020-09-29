@@ -23,9 +23,15 @@ const addItem = async (id, item, amount) => {
         amount: amount
     }
     const shop = await axios.post(`${shopUrl}/${id}/list`, itemToAdd)
-    console.log('SHOP IN SERVICE: ', shop)
+    return shop.data
+}
+
+const deleteItem = async (id, item) => {
+    console.log('eghaengaegn')
+    const shop = await axios.put(`${shopUrl}/${id}/list`, {item: item})
+    console.log('DELETE IN SERVICE: ', shop.data)
     return shop.data
 }
 
 
-export default { getAllUsersShops, addItem }
+export default { getAllUsersShops, addItem, deleteItem }

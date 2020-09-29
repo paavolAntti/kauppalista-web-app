@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import { addItem } from '../reducers/shopReducer'
 
 const AddItem = ( { shopID }) => {
-
     const [item, setItem] = useState('')
     const [amount, setAmount] = useState(1)
     const [visible, setVisible] = useState(false);
@@ -14,6 +13,8 @@ const AddItem = ( { shopID }) => {
         event.preventDefault()
         console.log(`adding ${item} to database`)
         dispatch(addItem(shopID, item, amount))
+        setItem('')
+        setAmount(1)
         flip()
     }
     const flip = () => {

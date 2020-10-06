@@ -25,6 +25,19 @@ export const addItem = (id, item, amount) => {
                 data: shop
             })
         } catch (exception) {
+            console.log('error adding item', exception.message)
+        }
+    }
+}
+export const addShop = (name, items) => {
+    return async dispatch => {
+        try {
+            const shop = await shopService.addShop(name, items)
+            dispatch({
+                type: 'NEWSHOP',
+                data: shop
+            })
+        } catch (exception) {
             console.log('error adding shop', exception.message)
         }
     }
@@ -57,6 +70,9 @@ const shopReducer = (state = null, action) => {
         case 'DELETE':
             console.log('after delete: ', action.data)
             state = state.filter(shop => shop.name !== action.data.name)
+            return [...state, action.data]
+        case 'NEWSHOP':
+            console.log('afted new shop: ', action.data)
             return [...state, action.data]
         default:
             return state

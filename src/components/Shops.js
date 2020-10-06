@@ -9,15 +9,18 @@ const Shops = ({ shops }) => {
             </div>
         )
     }
-    
     const listShops = () => shops.map(shop =>
-        <Shop
+        <div key={shop.name}>
+            <Shop
             key={shop.name}
             shop={shop}
         />
+        </div>
+        
         )
     return (
         <div>
+            <h2>your</h2>
             {listShops()}
         </div>
     )

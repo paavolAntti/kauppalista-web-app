@@ -1,0 +1,13 @@
+
+.flex_container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.navigation {
+    
+}
+.navigation h2 {
+    padding: 1%;
+}
+

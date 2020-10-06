@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Item from './Item'
 import AddItem from './AddItem'
 
+
 const Shop = ({ shop }) => {
+    const [show, setShow] = useState(false)
     
+    const handleButton = () => {
+        setShow(!show);
+    }
+
+    if (!show) {
+        return <button onClick={handleButton}>{shop.name}</button>
+    }
     return (
         <div>
-            <h2>{shop.name} </h2>
+            <button onClick={handleButton}>{shop.name}</button>
                 <table>
                     <tbody>
                         {shop.list.map(l =>

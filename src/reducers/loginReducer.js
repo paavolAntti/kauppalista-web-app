@@ -1,4 +1,5 @@
 import loginService from '../services/login'
+import storage from '../utils/storage'
 
 export const setUser = (user) => {
     return async dispatch => {
@@ -36,10 +37,12 @@ const loginReducer = (state = null, action) => {
         case 'LOGIN':
             console.log('login data: ', action.data)
             window.localStorage.setItem('loggedUser', JSON.stringify(action.data))
+            storage.saveUser(action.data)
             return action.data
         case 'LOGOUT':
             console.log('logout')
             window.localStorage.removeItem('loggedUser')
+            storage.logoutUser()
             return null
         case 'SETUSER':
             return action.data

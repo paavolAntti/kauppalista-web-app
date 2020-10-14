@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import Login from './components/Login'
 import Shops from './components/Shops'
 import NewShop from './components/NewShop'
+import Shop from './components/Shop'
 import { setUser, logoutUser } from './reducers/loginReducer'
 import { getUserShops } from './reducers/shopReducer'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-router-dom'
 import storage from './utils/storage'
 import styles from './styles/app.module.css'
 
@@ -54,6 +55,11 @@ const App = () => {
 					<Link style={linkStyle} to='/new'>new list</Link>
 				</div>
 				<Switch>
+					<Route path='/shops/:id'>
+						<Shop 
+							shops={shops} 
+						/>
+					</Route>
 					<Route path='/shops'>
 						<Shops
 							shops={shops}

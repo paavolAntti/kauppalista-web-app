@@ -11,11 +11,9 @@ const Item = ( { shopID, item, amount } ) => {
         dispatch(removeItem(shopID, item))
     }
     return (
-        <tr key={item}>
-            <td>{item}</td>
-            <td>{amount}</td>
-            <td><button onClick={deleteItem}>remove</button></td>
-        </tr>
+        <div>
+            <button onClick={deleteItem}>-</button> {item} {amount}
+        </div>
     )
      
 }

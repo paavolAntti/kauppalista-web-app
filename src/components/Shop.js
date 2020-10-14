@@ -1,23 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Item from './Item'
 import AddItem from './AddItem'
+import { useParams } from 'react-router-dom'
 
 
-const Shop = ({ shop }) => {
-    const [show, setShow] = useState(false)
+const Shop = ({ shops }) => {
+    console.log('shops', shops)
+    const id = useParams().id
+    console.log('id', id)
+    const shop = shops.find(s => s.id === id)
+    console.log('kauppa: ', shop)
     
-    const handleButton = () => {
-        setShow(!show);
-    }
-
-    if (!show) {
-        return <button onClick={handleButton}>{shop.name}</button>
-    }
+    
     return (
-        <div>
-            <button onClick={handleButton}>{shop.name}</button>
-                <table>
-                    <tbody>
+            <div>
+                <h2>{shop.name}</h2>
                         {shop.list.map(l =>
                             <Item
                                 key={l.item}
@@ -26,10 +23,8 @@ const Shop = ({ shop }) => {
                                 shopID={shop.id}
                             />
                         )}
-                    </tbody>
-                </table>
                 <AddItem shopID={shop.id}/>
-        </div>
+            </div>
     )
 }
 

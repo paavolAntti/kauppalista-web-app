@@ -1,7 +1,10 @@
 import React from 'react'
-import Shop from './Shop'
+import { Link } from 'react-router-dom'
 
 const Shops = ({ shops }) => {
+    const linkStyle = {
+		padding: 5
+	}
     if (!shops) {
         return (
             <div>
@@ -9,19 +12,13 @@ const Shops = ({ shops }) => {
             </div>
         )
     }
-    const listShops = () => shops.map(shop =>
-        <div key={shop.name}>
-            <Shop
-            key={shop.name}
-            shop={shop}
-        />
-        </div>
-        
-        )
     return (
         <div>
-            <h2>your</h2>
-            {listShops()}
+            <h2>all shops</h2>
+            {shops.map(shop => 
+                <div key={shop.id}>
+                    <Link style={linkStyle} key={shop.id} to={`/shops/${shop.id}`}>{shop.name}</Link>
+                </div>)}
         </div>
     )
 }

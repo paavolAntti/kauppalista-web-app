@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addShop } from '../reducers/shopReducer'
+import { useHistory } from 'react-router-dom'
 
 const NewShop = ( ) => {
     const [items, setItems] = useState([])
@@ -9,6 +10,7 @@ const NewShop = ( ) => {
     const [shop, setShop] = useState('')
     const [amount, setAmount] = useState(1)
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const addItem = (event) => {
         event.preventDefault()
@@ -22,6 +24,7 @@ const NewShop = ( ) => {
         dispatch(addShop(shop, items))
         setName('')
         setItems([])
+        history.push('/shops')
     }
     const showItems = () => items.map(i => 
             <div key={i.item}>

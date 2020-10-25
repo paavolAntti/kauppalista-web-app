@@ -42,13 +42,26 @@ export const addShop = (name, items) => {
         }
     }
 }
+export const removeShop = (id) => {
+    return async dispatch => {
+        try {
+            await shopService.deleteShop(id)
+            dispatch({
+                type: 'DELETESHOP',
+                data: id
+            })
+        } catch (exception) {
+            console.log('error deleting shop', exception.message)
+        }
+    }
+}
 export const removeItem = (id, item) => {
     return async dispatch => {
         try {
             console.log(`deleting item ${item} from shop ${id}`)
             const shop = await shopService.deleteItem(id, item)
             dispatch({
-                type: 'DELETE',
+                type: 'DELETEITEM',
                 data: shop
             })
         } catch (exception) {
@@ -67,13 +80,16 @@ const shopReducer = (state = null, action) => {
             // poistetaan tilasta edellinen versio listasta kopioiden välttämisesksi
             state = state.filter(shop => shop.name !== action.data.name)
             return [...state, action.data]
-        case 'DELETE':
+        case 'DELETEITEM':
             console.log('after delete: ', action.data)
             state = state.filter(shop => shop.name !== action.data.name)
             return [...state, action.data]
         case 'NEWSHOP':
             console.log('afted new shop: ', action.data)
             return [...state, action.data]
+        case 'DELETESHOP':
+            console.log('deleting shop: ', action.data)
+            return state.filter(s => s.id !== action.data)
         default:
             return state
     }

@@ -33,7 +33,9 @@ const addItem = async (id, item, amount) => {
     const shop = await axios.post(`${shopUrl}/${id}/list`, itemToAdd)
     return shop.data
 }
-
+const deleteShop = async (id) => {
+    await axios.delete(`${shopUrl}/${id}`, getConfig())
+}
 const deleteItem = async (id, item) => {
     console.log('eghaengaegn')
     const shop = await axios.put(`${shopUrl}/${id}/list`, {item: item})
@@ -42,4 +44,4 @@ const deleteItem = async (id, item) => {
 }
 
 
-export default { getAllUsersShops, addItem, deleteItem, addShop }
+export default { getAllUsersShops, addItem, deleteItem, addShop, deleteShop }

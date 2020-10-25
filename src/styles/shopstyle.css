@@ -1,0 +1,59 @@
+.shop_container {
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+}
+.shop_container h2 {
+    font-size: x-large;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+}
+.remove_button {
+    border-color: #EF5350;
+    background: #EF5350;
+}
+.add_button {
+    border-color: #66BB6A;
+    background: #66BB6A;
+}
+
+
+.single_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+
+.shop_container button {
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.single_item button {
+    width: 20%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.single_item .item {
+    width: 80%;
+    align-self: center;
+}
+
+.form_container {
+    
+}
+
+.form_container button {
+    border-color: #5472d3;
+    background: #5472d3;
+}
+
+
+

@@ -1,7 +1,7 @@
-import { findByPlaceholderText } from '@testing-library/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addItem } from '../reducers/shopReducer'
+import '../styles/shopstyle.css'
 
 const AddItem = ( { shopID }) => {
     const [item, setItem] = useState('')
@@ -24,7 +24,7 @@ const AddItem = ( { shopID }) => {
     const show = { display: visible ? '' : 'none' }
 
     return (
-        <div>
+        <div className='form_container'>
             <div style={ hide }>
             <button onClick={flip}>new item</button>
             </div>

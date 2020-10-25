@@ -7,8 +7,7 @@ import NewShop from './components/NewShop'
 import Shop from './components/Shop'
 import { setUser, logoutUser } from './reducers/loginReducer'
 import { getUserShops } from './reducers/shopReducer'
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-router-dom'
-import storage from './utils/storage'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import styles from './styles/app.module.css'
 
 

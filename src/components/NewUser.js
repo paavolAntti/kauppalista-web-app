@@ -1,25 +1,29 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loginUser } from '../reducers/loginReducer'
 import '../styles/formstyle.css'
+import { useHistory } from 'react-router-dom'
+import { newUser } from '../reducers/loginReducer'
 
 
-const Login = () => {
+
+const NewUser = () => {
     const [username, setUsername] = useState('')
+    const [mail, setMail] = useState('')
     const [password, setPassword] = useState('')
+    const history = useHistory()
     const dispatch = useDispatch()
 
-    const login = (event) => {
+    const create = (event) => {
         event.preventDefault()
-        console.log(`logging in with ${username} and ${password}`)
-        dispatch(loginUser({ username, password }))
-        
+        console.log(`creating new user with ${username} and ${mail}`)
+        dispatch(newUser(username, mail, password))
+        history.push('/login')
     }
 
     return (
         <div className='userform'>
-            <h2>login</h2>
-            <form onSubmit={login}>
+            <h2>new user</h2>
+            <form onSubmit={create}>
                 <div>
                         <input
                             type='text'
@@ -39,11 +43,20 @@ const Login = () => {
                         />
                 </div>
                 <div>
-                    <button type='submit'>login</button>
+                        <input
+                            type='text'
+                            name='mail'
+                            placeholder='email'
+                            value={mail}
+                            onChange={({target}) => setMail(target.value)}
+                        />
+                </div>
+                <div>
+                    <button type='submit'>create</button>
                 </div>
             </form>
         </div>
     )
 }
 
-export default Login
+export default NewUser

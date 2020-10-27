@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addItem } from '../reducers/shopReducer'
-import '../styles/shopstyle.css'
+import '../styles/formstyle.css'
 
 const AddItem = ( { shopID }) => {
     const [item, setItem] = useState('')
@@ -24,7 +24,7 @@ const AddItem = ( { shopID }) => {
     const show = { display: visible ? '' : 'none' }
 
     return (
-        <div className='form_container'>
+        <div className='userform'>
             <div style={ hide }>
             <button onClick={flip}>new item</button>
             </div>
@@ -32,26 +32,21 @@ const AddItem = ( { shopID }) => {
                 <h2>new item</h2> 
                 <form onSubmit={ add }>
                     <div>
-                        <label>
-                            name
                             <input
                                 type='text'
                                 name='item'
+                                placeholder='item'
                                 value={item}
                                 onChange={({ target }) => setItem(target.value)}
                             />
-                        </label>
                     </div>
                     <div>
-                        <label>
-                            amount
                             <input
                                 type='number'
                                 name='amount'
                                 value={amount}
                                 onChange={ ({ target }) => setAmount(target.value )}
                             />
-                        </label>
                     </div>
                     <div>
                         <button type='submit'>add</button>
@@ -59,7 +54,6 @@ const AddItem = ( { shopID }) => {
                 </form>
             </div>
         </div>
-        
     )
 }
 

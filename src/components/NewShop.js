@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addShop } from '../reducers/shopReducer'
 import { useHistory } from 'react-router-dom'
+import '../styles/formstyle.css'
 
 const NewShop = ( ) => {
     const [items, setItems] = useState([])
@@ -35,19 +36,17 @@ const NewShop = ( ) => {
  
     return (
         <div>
-            <div>
+            <div className='userform'>
                 <h2>new list</h2> 
                 <form onSubmit={add}>
                     <div>
-                        <label>
-                            shop
                             <input
                                 type='text'
                                 name='shop'
+                                placeholder='shop'
                                 value={shop}
                                 onChange={({ target }) => setShop(target.value)}
                             />
-                        </label>
                     </div>
                     <div>
                         <button type='submit'>add list</button>
@@ -56,34 +55,32 @@ const NewShop = ( ) => {
                 <div>
                 <form onSubmit={addItem}>
                     <div>
-                        <label>
                             <div>
-                                add item
                                 <input
                                     type='text'
                                     name='name'
+                                    placeholder='item'
                                     value={name}
                                     onChange={ ({ target }) => setName(target.value )}
                                 />
                             </div>
                             <div>
-                                amount
                                 <input
                                     type='number'
                                     name='amount'
+                                    placeholder='amount'
                                     value={amount}
                                     onChange={ ({ target }) => setAmount(target.value )}
                                 />
                             </div>
-                        </label>
                     </div>
                     <div>
                         <button type='submit'>add item</button>
                     </div>
                 </form>
-                <ul>
+                <div>
                     {showItems()}
-                </ul>
+                </div>
                     
             </div>
         </div>

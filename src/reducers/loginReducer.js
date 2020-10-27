@@ -1,4 +1,5 @@
 import loginService from '../services/login'
+import userService from '../services/users'
 import storage from '../utils/storage'
 
 export const setUser = (user) => {
@@ -32,6 +33,20 @@ export const logoutUser = () => {
     }
 }
 
+export const newUser = (username, mail, password) => {
+    return async dispatch => {
+        try {
+            const user = await userService.newUser(username, mail, password)
+            dispatch({
+                type: 'NEWUSER',
+                data: user
+            })
+        } catch (exception) {
+            console.log('error creating new user: ', exception.message)
+        }
+    }
+}
+
 const loginReducer = (state = null, action) => {
     switch (action.type) {
         case 'LOGIN':
@@ -46,6 +61,8 @@ const loginReducer = (state = null, action) => {
             return null
         case 'SETUSER':
             return action.data
+        case 'NEWUSER':
+            return state
         default:
             return state
     }

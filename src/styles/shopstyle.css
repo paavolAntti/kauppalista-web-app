@@ -55,5 +55,36 @@
     background: #5472d3;
 }
 
+.form_container input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border: 2px solid #8bc34a;
+    border-radius: 5px;
+    text-align: center;
+}
+
+@media screen and (min-width: 2400px) {
+    .content_container {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    
+    .content_container {
+        width: 50%;
+    }
+
+}
+@media screen and (max-width: 800px) {
+    
+    .content_container {
+        width: 80%;
+    }
+
+}
 
 

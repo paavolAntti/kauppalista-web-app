@@ -5,16 +5,19 @@ import Login from './components/Login'
 import Shops from './components/Shops'
 import NewShop from './components/NewShop'
 import Shop from './components/Shop'
+import NewUser from './components/NewUser'
 import { setUser, logoutUser } from './reducers/loginReducer'
 import { getUserShops } from './reducers/shopReducer'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import styles from './styles/app.module.css'
+import './styles/app.css'
+import { useHistory } from 'react-router-dom'
 
 
 const App = () => {
 	const dispatch = useDispatch()
 	const user = useSelector(state => state.user)
 	const shops = useSelector(state => state.shops)
+	
 
 	const linkStyle = {
 		padding: 5
@@ -33,19 +36,35 @@ const App = () => {
 		}
 	}, [dispatch, user])
 
-	const logout = () => {
+	const logout = (event) => {
+		event.preventDefault()
 		dispatch(logoutUser())
 	}
 	if (!user) {
 		return (
-			<div>
-				<Login/>
+			<div className='flex_container'>
+			<div className='content_container'>
+				<Router>
+					<div className='navigation'>
+						<Link style={linkStyle} to='/login'>login</Link>
+						<Link style={linkStyle} to='/newuser'>new user</Link>
+					</div>
+					<Switch>
+						<Route path='/login'>
+							<Login/>
+						</Route>
+						<Route path='/newuser'>
+							<NewUser/>
+						</Route>
+					</Switch>
+				</Router>
+			</div>
 			</div>
 		)
 	}
 	return (
-		<div className={styles.flex_container}>
-		<div className={styles.navigation}>
+		<div className='flex_container'>
+		<div className='content_container'>
 			<h4>{user.username} signed in <button onClick={logout}>logout</button></h4>
 			<Router>
 				<div>
@@ -68,12 +87,13 @@ const App = () => {
 						<NewShop/>
 					</Route>
 				</Switch>
-				<div>
-					<i>Shopping list app, Antti Paavola 2020</i>
-				</div>
 			</Router>
+			<div className='footer'>
+				<i>Shopping list app, Antti Paavola 2020</i>
+			</div>
 		</div>
 		</div>
+		
 	);
 }
 

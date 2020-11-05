@@ -16,6 +16,11 @@ const getAllUsersShops = async (user) => {
     return userToFind.data.shops
    
 }
+const addUserToList = async (shopid, userid) => {
+    const shop = await axios.post(`${shopUrl}/${shopid}/users`, {userid: userid})
+    console.log('tässä kauppa', shop)
+    return shop.data
+}
 const addShop = async (name, items) => {
     const shopToAdd = {
         name: name,
@@ -44,4 +49,4 @@ const deleteItem = async (id, item) => {
 }
 
 
-export default { getAllUsersShops, addItem, deleteItem, addShop, deleteShop }
+export default { getAllUsersShops, addItem, deleteItem, addShop, deleteShop, addUserToList, getConfig }

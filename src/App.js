@@ -76,11 +76,13 @@ const App = () => {
 					<Route path='/shops/:id'>
 						<Shop 
 							shops={shops} 
+							user={user}
 						/>
 					</Route>
 					<Route path='/shops'>
 						<Shops
 							shops={shops}
+							user={user}
 						/>
 					</Route>
 					<Route path='/new'>

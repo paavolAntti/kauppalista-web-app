@@ -1,4 +1,5 @@
 import shopService from '../services/shops'
+import userService from '../services/users'
 
 export const getUserShops = (user) => {
     return async dispatch => {
@@ -11,6 +12,25 @@ export const getUserShops = (user) => {
             })
         } catch (exception) {
             console.log(`error getting shops, ${exception.message}`)
+        }
+    }
+}
+
+export const addUserToList = (id, mail, shopid) => {
+    return async dispatch => {
+        try {
+            console.log('in reducer: ', mail)
+            console.log('shopid: ', shopid)
+            const userid = await userService.userWithMail(id, mail)
+            console.log('userid: ', userid)
+            const shop = await shopService.addUserToList(shopid, userid)
+            console.log('shop in reducer: ', shop)
+            dispatch({
+                type: 'SHARE',
+                data: shop
+            })
+        } catch (exception) {
+            console.log('error sharing', exception.message)            
         }
     }
 }
@@ -69,7 +89,6 @@ export const removeItem = (id, item) => {
         }
     }
 }
-
 const shopReducer = (state = null, action) => {
     switch (action.type) {
         case 'ALL':
@@ -90,6 +109,9 @@ const shopReducer = (state = null, action) => {
         case 'DELETESHOP':
             console.log('deleting shop: ', action.data)
             return state.filter(s => s.id !== action.data)
+        case 'SHARE':
+            console.log('sharing shop', action.data)
+            return state
         default:
             return state
     }

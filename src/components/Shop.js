@@ -1,12 +1,13 @@
 import React from 'react'
 import Item from './Item'
 import AddItem from './AddItem'
+import AddUserToList from './AddUserToList'
 import { useParams, useHistory } from 'react-router-dom'
 import { removeShop } from '../reducers/shopReducer'
 import { useDispatch } from 'react-redux'
 import '../styles/shopstyle.css'
 
-const Shop = ({ shops }) => {
+const Shop = ({ shops, user }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const id = useParams().id
@@ -22,7 +23,9 @@ const Shop = ({ shops }) => {
         history.push('/shops')
         dispatch(removeShop(shop.id))
     }
-    
+    if (!shop) return (
+        <div></div>
+    )
     return (
             <div className='shop_container'>
                 <div className='header'>
@@ -39,6 +42,10 @@ const Shop = ({ shops }) => {
                             />
                         )}
                 <AddItem shopID={shop.id}/>
+                <AddUserToList
+                    shopID={shop.id}
+                    userID={user.id}
+                />
             </div>
     )
 }

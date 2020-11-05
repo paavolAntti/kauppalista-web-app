@@ -13,4 +13,12 @@ const newUser = async (username, mail, password) => {
     
 }
 
-export default { newUser }
+const userWithMail = async (id, mail) => {
+    console.log('mail in controller: ', mail)
+    console.log('id in controller: ', id)
+    const user = await axios.get(`${baseUrl}/${id}/${mail}`)
+    console.log('user in controller: ', user)
+    return user.data.id
+}
+
+export default { newUser, userWithMail }

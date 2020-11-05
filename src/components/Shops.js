@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Shops = ({ shops }) => {
+const Shops = ({ shops, user }) => {
     const linkStyle = {
 		padding: 5
 	}
